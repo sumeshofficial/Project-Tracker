@@ -5,7 +5,7 @@ export class User {
     private readonly _id: string,
     private _fullname: string,
     private _email: string,
-    private _password: string,
+    private _passwordHash: string,
     private readonly _createdAt: Date,
     private _updatedAt: Date
   ) {
@@ -47,8 +47,8 @@ export class User {
     return this._email;
   }
 
-  get password(): string {
-    return this._password;
+  get passwordHashValue(): string {
+    return this._passwordHash;
   }
 
   get createdAt(): Date {
@@ -62,7 +62,7 @@ export class User {
   static create(data: {
     fullname: string;
     email: string;
-    password: string;
+    passwordHash: string;
   }): User {
     const now = new Date();
 
@@ -70,7 +70,7 @@ export class User {
       randomUUID(),
       data.fullname,
       data.email,
-      data.password,
+      data.passwordHash,
       now,
       now
     );

@@ -1,0 +1,9 @@
+export const ErrorCodes = {
+    USER_EXISTS: "USER_EXISTS",
+    UNAUTHORIZED: "UNAUTHORIZED",
+    INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+    INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+    VALIDATION_ERROR: "VALIDATION_ERROR",
+}
+
+export type ErrorCode = (typeof ErrorCodes)[keyof typeof ErrorCodes];
