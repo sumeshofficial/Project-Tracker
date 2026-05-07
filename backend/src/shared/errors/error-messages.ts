@@ -7,4 +7,5 @@ export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCodes.INVALID_CREDENTIALS]: "Invalid credentials",
     [ErrorCodes.VALIDATION_ERROR]: "Validation failed",
     [ErrorCodes.PROJECT_NOTFOUND]: "Project not found",
+    [ErrorCodes.TASK_NOTFOUD]: "Task not found",
 }

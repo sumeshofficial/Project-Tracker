@@ -11,6 +11,9 @@ import { CreateProjectDtoSchema } from "@application/dtos/project/create-project
 import { GetProjectDtoSchema } from "@application/dtos/project/get-project.dto.js";
 import { UpdateProjectDtoSchema } from "@application/dtos/project/update-project.dto.js";
 import { DeleteProjectDtoSchema } from "@application/dtos/project/delete-project.dto.js";
+import type { ListTasksUseCase } from "@application/use-cases/task/list-tasks.usecase.js";
+import { CreateTaskDtoSchema } from "@application/dtos/task/create-task.dto.js";
+import type { CreateTaskUseCase } from "@application/use-cases/task/create-task.usecase.js";
 
 export const createProjectRouter = (
   createProjectUseCase: CreateProjectUseCase,
@@ -18,6 +21,8 @@ export const createProjectRouter = (
   updateProjectUseCase: UpdateProjectUseCase,
   deleteProjectUseCase: DeleteProjectUseCase,
   getProjectUseCase: GetProjectUseCase,
+  listTasksUseCase: ListTasksUseCase,
+  createTaskUseCase: CreateTaskUseCase,
   tokenService: TokenService
 ) => {
   const router = Router();
@@ -57,7 +62,11 @@ export const createProjectRouter = (
     asyncHandler(async (req, res) => {
       const params = GetProjectDtoSchema.parse(req.params);
       const dto = UpdateProjectDtoSchema.parse(req.body);
-      const project = await updateProjectUseCase.execute(req.user!.sub, params.id, dto);
+      const project = await updateProjectUseCase.execute(
+        req.user!.sub,
+        params.id,
+        dto
+      );
       res.status(200).json({ success: true, data: project });
     })
   );
@@ -69,6 +78,34 @@ export const createProjectRouter = (
       const dto = DeleteProjectDtoSchema.parse(req.params);
       await deleteProjectUseCase.execute(req.user!.sub, dto);
       res.status(204).send();
+    })
+  );
+
+  router.post(
+    "/:id/tasks",
+    authenticate(tokenService),
+    asyncHandler(async (req, res) => {
+      const params = GetProjectDtoSchema.parse(req.params);
+      const dto = CreateTaskDtoSchema.parse(req.body);
+      const task = await createTaskUseCase.execute(
+        dto,
+        req.user!.sub,
+        params.id
+      );
+      res.status(201).json({ success: true, data: task });
+    })
+  );
+
+  router.get(
+    "/:id/tasks",
+    authenticate(tokenService),
+    asyncHandler(async (req, res) => {
+      const params = GetProjectDtoSchema.parse(req.params);
+      const tasks = await listTasksUseCase.execute(
+        req.user!.sub,
+        params.id
+      );
+      res.status(200).json({ success: true, data: tasks });
     })
   );
 
