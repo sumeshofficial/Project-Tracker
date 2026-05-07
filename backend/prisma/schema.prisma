@@ -13,12 +13,6 @@ enum TaskStatus {
   DONE
 }
 
-enum Priority {
-  LOW
-  MEDIUM
-  HIGH
-}
-
 model User {
   id           String     @id @db.VarChar(36)
   fullname     String     @db.VarChar(100)
@@ -37,7 +31,6 @@ model User {
 model Project {
   id          String   @id @db.VarChar(36)
   title       String
-  description String?
 
   userId String
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -53,9 +46,7 @@ model Project {
 model Task {
   id          String     @id @db.VarChar(36)
   title       String
-  description String?
   status      TaskStatus @default(TODO)
-  priority    Priority   @default(MEDIUM)
   dueDate     DateTime?
 
   userId String

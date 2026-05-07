@@ -6,4 +6,5 @@ export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCodes.INTERNAL_SERVER_ERROR]: "Internal server error",
     [ErrorCodes.INVALID_CREDENTIALS]: "Invalid credentials",
     [ErrorCodes.VALIDATION_ERROR]: "Validation failed",
+    [ErrorCodes.PROJECT_NOTFOUND]: "Project not found",
 }
