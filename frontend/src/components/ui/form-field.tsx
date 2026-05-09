@@ -11,7 +11,7 @@ export function FormField({ label, error, children }: FormFieldProps) {
     <div className="stack" style={{ gap: "0.35rem" }}>
       <label>{label}</label>
       {children}
-      {error ? <span className="error">{error}</span> : null}
+      {error ? <span className="text-red-500">{error}</span> : null}
     </div>
   );
 }

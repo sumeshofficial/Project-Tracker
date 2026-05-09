@@ -6,7 +6,6 @@ import { asyncHandler } from "../utils/async-handler.js";
 import { RegisterDtoSchema } from "@application/dtos/auth/register.dto.js";
 import { LoginDtoSchema } from "@application/dtos/auth/login.dto.js";
 import { authenticate } from "../middleware/auth.middleware.js";
-import type { success } from "zod";
 
 export const createAuthRouter = (
   registerUseCase: RegisterUseCase,

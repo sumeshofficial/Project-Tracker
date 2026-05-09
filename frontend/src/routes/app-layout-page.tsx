@@ -1,9 +1,9 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Outlet, useNavigate } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
 import { toast } from "@/lib/toast";
 import { useLogout } from "@/features/auth/auth-query";
 
-export default function HomePage() {
+export default function AppLayoutPage() {
   const navigate = useNavigate();
   const logout = useLogout();
 
@@ -32,16 +32,8 @@ export default function HomePage() {
         </button>
       </header>
 
-      <main className="mx-auto max-w-6xl p-6">
-        <div className="rounded-xl bg-white p-8 shadow-sm">
-          <h2 className="mb-2 text-3xl font-bold">
-            Welcome Back 👋
-          </h2>
-
-          <p className="text-gray-600">
-            Your project dashboard is ready.
-          </p>
-        </div>
+      <main className="mx-auto max-w-6xl">
+        <Outlet />
       </main>
     </div>
   );

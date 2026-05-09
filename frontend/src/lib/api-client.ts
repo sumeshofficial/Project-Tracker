@@ -2,7 +2,10 @@ import { getAccessToken, clearAccessToken } from "@/features/auth/auth-storage";
 import type { ApiEnvelope } from "@/lib/types";
 
 const configuredApiBaseUrl =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
+  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(
+    /\/$/,
+    ""
+  ) ?? "";
 
 // In local dev, prefer Vite proxy to avoid CORS/preflight issues for auth-protected routes.
 const API_BASE_URL = import.meta.env.DEV ? "" : configuredApiBaseUrl;
@@ -10,7 +13,7 @@ const API_BASE_URL = import.meta.env.DEV ? "" : configuredApiBaseUrl;
 export class ApiError extends Error {
   constructor(
     message: string,
-    public readonly status: number,
+    public readonly status: number
   ) {
     super(message);
     this.name = "ApiError";
@@ -34,7 +37,9 @@ const resolveUrl = (path: string): string => {
   return `${API_BASE_URL}${normalized}`;
 };
 
-const extractDetailedErrorMessage = (payload: ApiErrorEnvelope | ApiEnvelope<unknown> | null) => {
+const extractDetailedErrorMessage = (
+  payload: ApiErrorEnvelope | ApiEnvelope<unknown> | null
+) => {
   if (!payload || !("details" in payload) || !payload.details) return undefined;
 
   const formError = payload.details.formErrors?.find(Boolean);
@@ -54,7 +59,7 @@ const extractDetailedErrorMessage = (payload: ApiErrorEnvelope | ApiEnvelope<unk
 export const apiFetch = async <T>(
   path: string,
   init: RequestInit = {},
-  auth = true,
+  auth = true
 ): Promise<T> => {
   const headers = new Headers(init.headers);
   headers.set("Content-Type", "application/json");
@@ -70,6 +75,10 @@ export const apiFetch = async <T>(
     ...init,
     headers,
   });
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
 
   const payload = (await response.json().catch(() => null)) as
     | ApiEnvelope<T>

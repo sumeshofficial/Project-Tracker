@@ -24,4 +24,16 @@ export const toast = {
       timerProgressBar: true,
     });
   },
+
+  confirm(message: string) {
+    return Swal.fire({
+      title: "Are you sure?",
+      text: message,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#000",
+    });
+  },
 };

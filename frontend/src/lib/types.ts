@@ -10,3 +10,16 @@ export interface SessionUser {
   userId: string;
   email: string;
 }
+
+export interface Project {
+  id: string;
+  title: string;
+  createdAt: Date;
+}
+
+export interface Task {
+  id: string;
+  title: string;
+  status: string;
+  dueDate: Date;
+}
