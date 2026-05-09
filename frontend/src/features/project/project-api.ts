@@ -13,6 +13,9 @@ export const listProjects = () => {
   return apiFetch<Project[]>("/api/projects");
 };
 
+export const getProject = (projectId: string) =>
+  apiFetch<Project>(`/api/projects/${projectId}`);
+
 export const createProject = (input: CreateProjectInput) =>
   apiFetch<Project>("/api/projects", {
     method: "POST",

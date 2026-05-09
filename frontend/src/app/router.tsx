@@ -13,6 +13,7 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import TasksPage from "@/routes/tasks-page";
+import NewTaskPage from "@/routes/new-task-page";
 
 interface RouterContext {
   queryClient: typeof queryClient;
@@ -86,12 +87,18 @@ const newProjectRoute = createRoute({
 });
 
 const tasksRoute = createRoute({
-  getParentRoute: () => projectsRoute,
-  path: "tasks",
+  getParentRoute: () => appRoute,
+  path: "projects/$id/tasks",
   beforeLoad: requireAuth,
   component: TasksPage,
 });
 
+const newTaskRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "projects/$id/tasks/new",
+  beforeLoad: requireAuth,
+  component: NewTaskPage,
+});
 
 const routeTree = rootRoute.addChildren([
   registerRoute,
@@ -100,6 +107,8 @@ const routeTree = rootRoute.addChildren([
   appRoute.addChildren([
     projectsRoute,
     newProjectRoute,
+    tasksRoute,
+    newTaskRoute
   ]),
 ]);
 

@@ -5,8 +5,10 @@ export const useCreateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({projectId, input}: {projectId: string, input: CreateTaskInput}) => createTask(projectId, input),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    onSuccess: async (_data, variables) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["tasks", variables.projectId],
+      });
     },
   });
 };
@@ -22,7 +24,9 @@ export const useUpdateTask = () => {
       input: UpdateTaskInput;
     }) => updateTask(taskId, input),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
   });
 };
@@ -32,14 +36,16 @@ export const useDeleteTask = () => {
   return useMutation({
     mutationFn: (taskId: string) => deleteTask(taskId),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
     },
   });
 };
 
 export const useListTasks = (projectId: string) => {
   return useQuery({
-    queryKey: ["tasks"],
+    queryKey: ["tasks", projectId],
     queryFn: () => listTasks(projectId),
     enabled: !!projectId
   });

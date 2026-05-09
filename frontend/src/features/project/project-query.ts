@@ -3,6 +3,7 @@ import {
   createProject,
   CreateProjectInput,
   deleteProject,
+  getProject,
   listProjects,
   updateProject,
   UpdateProjectInput,
@@ -48,5 +49,12 @@ export const useListProjects = () => {
   return useQuery({
     queryKey: ["projects"],
     queryFn: listProjects,
+  });
+};
+
+export const useGetProject = (projectId: string) => {
+  return useQuery({
+    queryKey: ["project"],
+    queryFn: () => getProject(projectId),
   });
 };

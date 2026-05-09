@@ -99,9 +99,9 @@ export default function ProjectsPage() {
 
             <Link
               to="/app/projects/new"
-              className="rounded-lg bg-black px-4 py-2 font-medium text-white transition hover:opacity-90"
+              className="rounded-lg bg-black p-2 text-white transition hover:opacity-90"
             >
-              <Plus />
+              <Plus size={20} />
             </Link>
           </div>
 
@@ -121,7 +121,13 @@ export default function ProjectsPage() {
                   className="flex items-center justify-between rounded-lg bg-white p-4 shadow"
                 >
                   <div>
-                    <h2 className="text-lg font-semibold">{project.title}</h2>
+                    <Link
+                      to="/app/projects/$id/tasks"
+                      params={{ id: project.id }}
+                      className="text-lg font-semibold transition hover:underline"
+                    >
+                      {project.title}
+                    </Link>
 
                     <p className="mt-1 text-sm text-gray-500">
                       Created at:{" "}

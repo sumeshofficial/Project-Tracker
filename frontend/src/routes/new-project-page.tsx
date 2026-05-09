@@ -32,10 +32,18 @@ export default function NewProjectPage() {
 
   const onSubmit = async (data: CreateProjectFormData) => {
     try {
-      await createProjectMutation.mutateAsync(data);
-      await navigate({ to: "/app/projects" });
+      const project = await createProjectMutation.mutateAsync(data);
+
       toast.success("Project created");
+
       reset();
+
+      await navigate({
+        to: "/app/projects/$id/tasks",
+        params: {
+          id: project.id,
+        },
+      });
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
