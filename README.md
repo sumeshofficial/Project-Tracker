@@ -222,14 +222,12 @@ cd backend
 npm install
 ```
 
-## 3. Setup environment variables
+## 3. Create environment variables
 
-Create `.env`
+Copy `.env.example` to `.env`
 
-```env
-DATABASE_URL=
-JWT_SECRET=
-PORT=
+```bash
+cp .env.example .env
 ```
 
 ---
