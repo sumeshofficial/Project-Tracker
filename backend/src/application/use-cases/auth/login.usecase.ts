@@ -40,13 +40,13 @@ export class LoginUseCase {
         });
     }
 
-    async execute(input: LoginDto): Promise<{ acessToken: string }> {
+    async execute(input: LoginDto): Promise<{ accessToken: string }> {
         const user = await this.getUserOrFail(input.email);
 
         await this.validatePassword(input.password, user);
 
-        const acessToken = this.generateToken(user);
+        const accessToken = this.generateToken(user);
 
-        return { acessToken };
+        return { accessToken };
     }
 }

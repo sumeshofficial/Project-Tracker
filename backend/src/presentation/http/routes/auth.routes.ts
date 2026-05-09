@@ -6,6 +6,7 @@ import { asyncHandler } from "../utils/async-handler.js";
 import { RegisterDtoSchema } from "@application/dtos/auth/register.dto.js";
 import { LoginDtoSchema } from "@application/dtos/auth/login.dto.js";
 import { authenticate } from "../middleware/auth.middleware.js";
+import type { success } from "zod";
 
 export const createAuthRouter = (
   registerUseCase: RegisterUseCase,
@@ -38,7 +39,7 @@ export const createAuthRouter = (
     asyncHandler(async (req, res) => {
       const user = req.user;
       res.status(200).json({
-        ok: true,
+        success: true,
         data: {
           id: user?.sub,
           email: user?.email,
