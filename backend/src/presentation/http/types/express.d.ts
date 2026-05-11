@@ -1,4 +1,4 @@
-import type { AuthTokenPayload } from "@application/types/auth-token-payload.ts";
+import type { AuthTokenPayload } from "@application/types/auth-token-payload";
 
 declare global {
   namespace Express {

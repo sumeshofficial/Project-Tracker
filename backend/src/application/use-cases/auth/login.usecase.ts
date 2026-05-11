@@ -1,9 +1,9 @@
-import type { LoginDto } from "@application/dtos/auth/login.dto.js";
-import { InvalidCredentialsException } from "@application/errors/auth/invalid-credentials.exception.js";
-import type { PasswordHasher } from "@application/ports/password-hasher.port.js";
-import type { TokenService } from "@application/ports/token.port.js";
-import type { User } from "@domain/entities/user.entity.js";
-import type { UserRepository } from "@domain/repositories/user.repository.js";
+import type { LoginDto } from "@application/dtos/auth/login.dto";
+import { InvalidCredentialsException } from "@application/errors/auth/invalid-credentials.exception";
+import type { PasswordHasher } from "@application/ports/password-hasher.port";
+import type { TokenService } from "@application/ports/token.port";
+import type { User } from "@domain/entities/user.entity";
+import type { UserRepository } from "@domain/repositories/user.repository";
 
 export class LoginUseCase {
     constructor(

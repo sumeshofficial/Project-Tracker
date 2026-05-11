@@ -1,4 +1,4 @@
-import type { AuthTokenPayload } from "@application/types/auth-token-payload.js";
+import type { AuthTokenPayload } from "@application/types/auth-token-payload";
 
 export interface TokenService {
     generate(payload: AuthTokenPayload): string;

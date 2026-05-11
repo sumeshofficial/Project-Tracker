@@ -1,4 +1,4 @@
-import { GetProjectDtoSchema, type GetProjectDto } from "./get-project.dto.js";
+import { GetProjectDtoSchema, type GetProjectDto } from "./get-project.dto";
 
 export const DeleteProjectDtoSchema = GetProjectDtoSchema;
 export type DeleteProjectDto = GetProjectDto;

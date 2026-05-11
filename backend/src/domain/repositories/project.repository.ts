@@ -1,4 +1,4 @@
-import type { Project } from "@domain/entities/project.entity.js";
+import type { Project } from "@domain/entities/project.entity";
 
 export interface ProjectRepository {
   save(project: Project): Promise<void>;

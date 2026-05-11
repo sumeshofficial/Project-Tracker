@@ -1,4 +1,4 @@
-import type { Task } from "@domain/entities/task.entity.js";
+import type { Task } from "@domain/entities/task.entity";
 
 export interface TaskRepository {
   save(task: Task): Promise<void>;

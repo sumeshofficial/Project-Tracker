@@ -1,7 +1,7 @@
-import type { CreateTaskDto } from "@application/dtos/task/create-task.dto.js";
-import { Task, type TaskDTO } from "@domain/entities/task.entity.js";
-import type { TaskRepository } from "@domain/repositories/task.repository.js";
-import { TaskStatus } from "@domain/value-objects/task-status.js";
+import type { CreateTaskDto } from "@application/dtos/task/create-task.dto";
+import { Task, type TaskDTO } from "@domain/entities/task.entity";
+import type { TaskRepository } from "@domain/repositories/task.repository";
+import { TaskStatus } from "@domain/value-objects/task-status";
 
 export class CreateTaskUseCase {
     constructor(private readonly taskRepository: TaskRepository) {};

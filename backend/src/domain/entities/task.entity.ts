@@ -1,4 +1,4 @@
-import type { TaskStatus } from "@domain/value-objects/task-status.js";
+import type { TaskStatus } from "@domain/value-objects/task-status";
 import { randomUUID } from "node:crypto";
 
 export class Task {

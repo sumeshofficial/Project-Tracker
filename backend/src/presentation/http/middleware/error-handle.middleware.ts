@@ -1,8 +1,8 @@
 import type { ErrorRequestHandler } from "express";
 import { ZodError, z } from "zod";
-import { AppException } from "@shared/errors/app.exception.js";
-import { ErrorCodes } from "@shared/errors/error-codes.js";
-import { ErrorMessages } from "@shared/errors/error-messages.js";
+import { AppException } from "@shared/errors/app.exception";
+import { ErrorCodes } from "@shared/errors/error-codes";
+import { ErrorMessages } from "@shared/errors/error-messages";
 
 export const errorHandlerMiddleware = (): ErrorRequestHandler => {
   return (error, _request, response, _next) => {
@@ -15,8 +15,6 @@ export const errorHandlerMiddleware = (): ErrorRequestHandler => {
       error instanceof AppException
         ? error.message
         : ErrorMessages.INTERNAL_SERVER_ERROR;
-
-    console.error(error);
 
     if (error instanceof ZodError) {
       return response.status(400).json({

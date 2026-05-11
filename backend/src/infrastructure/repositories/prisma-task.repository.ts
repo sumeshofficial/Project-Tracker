@@ -1,7 +1,7 @@
-import { Task } from "@domain/entities/task.entity.js";
-import type { TaskRepository } from "@domain/repositories/task.repository.js";
-import { TaskStatus } from "@domain/value-objects/task-status.js";
-import { prismaClient } from "@infrastructure/database/prisma/prisma.client.js";
+import { Task } from "@domain/entities/task.entity";
+import type { TaskRepository } from "@domain/repositories/task.repository";
+import { TaskStatus } from "@domain/value-objects/task-status";
+import { prismaClient } from "@infrastructure/database/prisma/prisma.client";
 import type { Prisma } from "@prisma/client";
 import type { Task as PrismaTask } from "@prisma/client";
 

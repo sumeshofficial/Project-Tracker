@@ -1,4 +1,4 @@
-import { ErrorCodes, type ErrorCode } from "./error-codes.js";
+import { ErrorCodes, type ErrorCode } from "./error-codes";
 
 export const ErrorMessages: Record<ErrorCode, string> = {
     [ErrorCodes.USER_EXISTS]: "User with this email already exists",

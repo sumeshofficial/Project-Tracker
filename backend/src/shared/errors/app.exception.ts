@@ -1,5 +1,5 @@
-import type { ErrorCode } from "./error-codes.js";
-import { ErrorMessages } from "./error-messages.js";
+import type { ErrorCode } from "./error-codes";
+import { ErrorMessages } from "./error-messages";
 
 export class AppException extends Error {
   constructor(

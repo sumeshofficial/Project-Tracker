@@ -1,5 +1,5 @@
-import { TaskNotFoundException } from "@application/errors/task/task-not-found.exception.js";
-import type { TaskRepository } from "@domain/repositories/task.repository.js";
+import { TaskNotFoundException } from "@application/errors/task/task-not-found.exception";
+import type { TaskRepository } from "@domain/repositories/task.repository";
 
 export class DeleteTaskUseCase {
   constructor(private readonly taskRepository: TaskRepository) {}

@@ -1,6 +1,6 @@
-import type { CreateProjectDto } from "@application/dtos/project/create-project.dto.js";
-import { Project, type ProjectDTO } from "@domain/entities/project.entity.js";
-import type { ProjectRepository } from "@domain/repositories/project.repository.js";
+import type { CreateProjectDto } from "@application/dtos/project/create-project.dto";
+import { Project, type ProjectDTO } from "@domain/entities/project.entity";
+import type { ProjectRepository } from "@domain/repositories/project.repository";
 
 export class CreateProjectUseCase {
     constructor(private readonly projectRepository: ProjectRepository) {};
