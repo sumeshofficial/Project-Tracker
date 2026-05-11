@@ -1,7 +1,7 @@
-import { User } from "@domain/entities/user.entity.js";
-import type { UserRepository } from "@domain/repositories/user.repository.js";
+import { User } from "@domain/entities/user.entity";
+import type { UserRepository } from "@domain/repositories/user.repository";
 import { Prisma } from "@prisma/client";
-import { prismaClient } from "@infrastructure/database/prisma/prisma.client.js";
+import { prismaClient } from "@infrastructure/database/prisma/prisma.client";
 
 type PrismaUserRow = NonNullable<
   Awaited<ReturnType<typeof prismaClient.user.findUnique>>

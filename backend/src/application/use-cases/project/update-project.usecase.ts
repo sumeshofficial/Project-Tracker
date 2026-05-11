@@ -1,7 +1,7 @@
-import type { UpdateProjectDto } from "@application/dtos/project/update-project.dto.js";
-import { ProjectNotFoundException } from "@application/errors/project/project-not-found.exception.js";
-import type { ProjectDTO } from "@domain/entities/project.entity.js";
-import type { ProjectRepository } from "@domain/repositories/project.repository.js";
+import type { UpdateProjectDto } from "@application/dtos/project/update-project.dto";
+import { ProjectNotFoundException } from "@application/errors/project/project-not-found.exception";
+import type { ProjectDTO } from "@domain/entities/project.entity";
+import type { ProjectRepository } from "@domain/repositories/project.repository";
 
 export class UpdateProjectUseCase {
     constructor(private readonly projectRepository: ProjectRepository) {};

@@ -1,6 +1,6 @@
-import type { DeleteProjectDto } from "@application/dtos/project/delete-project.dto.js";
-import { ProjectNotFoundException } from "@application/errors/project/project-not-found.exception.js";
-import type { ProjectRepository } from "@domain/repositories/project.repository.js";
+import type { DeleteProjectDto } from "@application/dtos/project/delete-project.dto";
+import { ProjectNotFoundException } from "@application/errors/project/project-not-found.exception";
+import type { ProjectRepository } from "@domain/repositories/project.repository";
 
 export class DeleteProjectUseCase {
   constructor(private readonly projectRepository: ProjectRepository) {}

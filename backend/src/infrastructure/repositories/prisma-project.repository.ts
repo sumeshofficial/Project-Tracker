@@ -1,6 +1,6 @@
-import { Project } from "@domain/entities/project.entity.js";
-import type { ProjectRepository } from "@domain/repositories/project.repository.js";
-import { prismaClient } from "@infrastructure/database/prisma/prisma.client.js";
+import { Project } from "@domain/entities/project.entity";
+import type { ProjectRepository } from "@domain/repositories/project.repository";
+import { prismaClient } from "@infrastructure/database/prisma/prisma.client";
 import type { Prisma } from "@prisma/client";
 
 type PrismaProjectRow = NonNullable<

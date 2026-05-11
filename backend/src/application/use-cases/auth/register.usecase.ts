@@ -1,8 +1,8 @@
-import type { RegisterDto } from "@application/dtos/auth/register.dto.js";
-import { UserExistsException } from "@application/errors/auth/user-exists.exception.js";
-import type { PasswordHasher } from "@application/ports/password-hasher.port.js";
-import { User, type UserDTO } from "@domain/entities/user.entity.js";
-import type { UserRepository } from "@domain/repositories/user.repository.js";
+import type { RegisterDto } from "@application/dtos/auth/register.dto";
+import { UserExistsException } from "@application/errors/auth/user-exists.exception";
+import type { PasswordHasher } from "@application/ports/password-hasher.port";
+import { User, type UserDTO } from "@domain/entities/user.entity";
+import type { UserRepository } from "@domain/repositories/user.repository";
 
 export class RegisterUseCase {
     constructor(

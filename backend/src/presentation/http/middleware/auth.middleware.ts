@@ -1,6 +1,6 @@
-import type { TokenService } from "@application/ports/token.port.js";
 import type { NextFunction, Request, Response } from "express";
-import { UnauthorizedException } from "../errors/unauthorized.exception.js";
+import type { TokenService } from "@application/ports/token.port";
+import { UnauthorizedException } from "../errors/unauthorized.exception";
 
 export const authenticate = (tokenService: TokenService) => {
   return (request: Request, _response: Response, next: NextFunction): void => {

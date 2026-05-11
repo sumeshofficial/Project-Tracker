@@ -1,6 +1,6 @@
-import type { TokenService } from "@application/ports/token.port.js";
-import type { AuthTokenPayload } from "@application/types/auth-token-payload.js";
-import { env } from "@config/env.config.js";
+import type { TokenService } from "@application/ports/token.port";
+import type { AuthTokenPayload } from "@application/types/auth-token-payload";
+import { env } from "@config/env.config";
 import jwt from "jsonwebtoken";
 
 export class JwtTokenService implements TokenService {

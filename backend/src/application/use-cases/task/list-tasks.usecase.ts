@@ -1,5 +1,5 @@
-import { type TaskDTO } from "@domain/entities/task.entity.js";
-import type { TaskRepository } from "@domain/repositories/task.repository.js";
+import { type TaskDTO } from "@domain/entities/task.entity";
+import type { TaskRepository } from "@domain/repositories/task.repository";
 
 export class ListTasksUseCase {
     constructor(private readonly taskRepository: TaskRepository) {};

@@ -1,4 +1,4 @@
-import type { PasswordHasher } from "@application/ports/password-hasher.port.js";
+import type { PasswordHasher } from "@application/ports/password-hasher.port";
 import bcrypt from "bcryptjs";
 
 export class PasswordHashService implements PasswordHasher {

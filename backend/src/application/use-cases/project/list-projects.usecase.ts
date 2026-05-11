@@ -1,5 +1,5 @@
-import type { ProjectDTO } from "@domain/entities/project.entity.js";
-import type { ProjectRepository } from "@domain/repositories/project.repository.js";
+import type { ProjectDTO } from "@domain/entities/project.entity";
+import type { ProjectRepository } from "@domain/repositories/project.repository";
 
 export class ListProjectsUseCase {
     constructor(private readonly projectRepository: ProjectRepository) {};

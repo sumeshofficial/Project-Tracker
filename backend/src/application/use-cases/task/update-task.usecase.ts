@@ -1,8 +1,8 @@
-import type { UpdateTaskDto } from "@application/dtos/task/update-task.dto.js";
-import { TaskNotFoundException } from "@application/errors/task/task-not-found.exception.js";
-import type { TaskDTO } from "@domain/entities/task.entity.js";
-import type { TaskRepository } from "@domain/repositories/task.repository.js";
-import { TaskStatus } from "@domain/value-objects/task-status.js";
+import type { UpdateTaskDto } from "@application/dtos/task/update-task.dto";
+import { TaskNotFoundException } from "@application/errors/task/task-not-found.exception";
+import type { TaskDTO } from "@domain/entities/task.entity";
+import type { TaskRepository } from "@domain/repositories/task.repository";
+import { TaskStatus } from "@domain/value-objects/task-status";
 
 export class UpdateTaskUseCase {
     constructor(private readonly taskRepository: TaskRepository) {};
