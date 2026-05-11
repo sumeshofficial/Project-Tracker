@@ -1,7 +1,7 @@
+import type { Request, Response } from "express";
 import { DeleteTaskUseCase } from "@application/use-cases/task/delete-task.usecase";
 import { GetTaskUseCase } from "@application/use-cases/task/get-task.usecase";
-import { UpdateTaskUseCase } from "@application/use-cases/task/update-task.usecase";
-import { asyncHandler } from "../utils/async-handler";
+import { UpdateTaskUseCase } from "@application/use-cases/task/update-task.usecase"
 import { GetProjectDtoSchema } from "@application/dtos/project/get-project.dto";
 import { CreateTaskDtoSchema } from "@application/dtos/task/create-task.dto";
 import { CreateTaskUseCase } from "@application/use-cases/task/create-task.usecase";
@@ -18,7 +18,7 @@ export class TaskController {
     private _getTaskUseCase: GetTaskUseCase
   ) {}
 
-  create = asyncHandler(async (req, res) => {
+  create = async (req: Request, res: Response) => {
     const params = GetProjectDtoSchema.parse(req.params);
     const dto = CreateTaskDtoSchema.parse(req.body);
     const task = await this._createTaskUseCase.execute(
@@ -27,24 +27,24 @@ export class TaskController {
       params.id
     );
     res.status(201).json({ success: true, data: task });
-  });
+  };
 
-  list = asyncHandler(async (req, res) => {
+  list = async (req: Request, res: Response) => {
     const params = GetProjectDtoSchema.parse(req.params);
     const tasks = await this._listTasksUseCase.execute(
       req.user!.sub,
       params.id
     );
     res.status(200).json({ success: true, data: tasks });
-  });
+  };
 
-  get = asyncHandler(async (req, res) => {
+  get = async (req: Request, res: Response) => {
     const params = GetTaskDtoSchema.parse(req.params);
     const task = await this._getTaskUseCase.execute(req.user!.sub, params.id);
     res.status(200).json({ success: true, data: task });
-  });
+  };
 
-  update = asyncHandler(async (req, res) => {
+  update = async (req: Request, res: Response) => {
     const params = GetTaskDtoSchema.parse(req.params);
     const dto = UpdateTaskDtoSchema.parse(req.body);
     const task = await this._updateTaskUseCase.execute(
@@ -53,11 +53,11 @@ export class TaskController {
       dto
     );
     res.status(200).json({ success: true, data: task });
-  });
+  };
 
-  delete = asyncHandler(async (req, res) => {
+  delete = async (req: Request, res: Response) => {
     const params = GetTaskDtoSchema.parse(req.params);
     await this._deleteTaskUseCase.execute(req.user!.sub, params.id);
     res.status(204).send();
-  });
+  };
 }
