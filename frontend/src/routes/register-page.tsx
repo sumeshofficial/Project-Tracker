@@ -37,13 +37,12 @@ export default function RegisterPage() {
     try {
       await registerMutation.mutateAsync(data);
       await toast.success("User registered");
+      await navigate({ to: "/login" });
     } catch (error) {
       if (error instanceof ApiError) {
         toast.error(error.message);
       }
     }
-
-    await navigate({ to: "/login" });
   };
 
   return (
