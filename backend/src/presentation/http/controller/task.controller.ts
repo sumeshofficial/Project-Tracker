@@ -8,6 +8,7 @@ import { CreateTaskUseCase } from "@application/use-cases/task/create-task.useca
 import { ListTasksUseCase } from "@application/use-cases/task/list-tasks.usecase";
 import { GetTaskDtoSchema } from "@application/dtos/task/get-task.dto";
 import { UpdateTaskDtoSchema } from "@application/dtos/task/update-task.dto";
+import { HttpStatusCode } from "@shared/constants/http-status";
 
 export class TaskController {
   constructor(
@@ -26,7 +27,7 @@ export class TaskController {
       req.user!.sub,
       params.id
     );
-    res.status(201).json({ success: true, data: task });
+    res.status(HttpStatusCode.CREATED).json({ success: true, data: task });
   };
 
   list = async (req: Request, res: Response) => {
@@ -35,13 +36,13 @@ export class TaskController {
       req.user!.sub,
       params.id
     );
-    res.status(200).json({ success: true, data: tasks });
+    res.status(HttpStatusCode.OK).json({ success: true, data: tasks });
   };
 
   get = async (req: Request, res: Response) => {
     const params = GetTaskDtoSchema.parse(req.params);
     const task = await this._getTaskUseCase.execute(req.user!.sub, params.id);
-    res.status(200).json({ success: true, data: task });
+    res.status(HttpStatusCode.OK).json({ success: true, data: task });
   };
 
   update = async (req: Request, res: Response) => {
@@ -52,12 +53,12 @@ export class TaskController {
       params.id,
       dto
     );
-    res.status(200).json({ success: true, data: task });
+    res.status(HttpStatusCode.OK).json({ success: true, data: task });
   };
 
   delete = async (req: Request, res: Response) => {
     const params = GetTaskDtoSchema.parse(req.params);
     await this._deleteTaskUseCase.execute(req.user!.sub, params.id);
-    res.status(204).send();
+    res.status(HttpStatusCode.NO_CONTENT).send();
   };
 }

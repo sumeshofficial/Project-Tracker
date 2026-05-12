@@ -8,6 +8,7 @@ import { CreateProjectDtoSchema } from "@application/dtos/project/create-project
 import { GetProjectDtoSchema } from "@application/dtos/project/get-project.dto";
 import { UpdateProjectDtoSchema } from "@application/dtos/project/update-project.dto";
 import { DeleteProjectDtoSchema } from "@application/dtos/project/delete-project.dto";
+import { HttpStatusCode } from "@shared/constants/http-status";
 
 export class ProjectController {
   constructor(
@@ -24,18 +25,18 @@ export class ProjectController {
       dto,
       req.user!.sub
     );
-    res.status(201).json({ success: true, data: project });
+    res.status(HttpStatusCode.CREATED).json({ success: true, data: project });
   };
 
   list = async (req: Request, res: Response) => {
     const projects = await this._listProjectsUseCase.execute(req.user!.sub);
-    res.status(200).json({ success: true, data: projects });
+    res.status(HttpStatusCode.OK).json({ success: true, data: projects });
   };
 
   get = async (req: Request, res: Response) => {
     const dto = GetProjectDtoSchema.parse(req.params);
     const project = await this._getProjectUseCase.execute(req.user!.sub, dto);
-    res.status(200).json({ success: true, data: project });
+    res.status(HttpStatusCode.OK).json({ success: true, data: project });
   };
 
   update = async (req: Request, res: Response) => {
@@ -46,12 +47,12 @@ export class ProjectController {
       params.id,
       dto
     );
-    res.status(200).json({ success: true, data: project });
+    res.status(HttpStatusCode.OK).json({ success: true, data: project });
   };
 
   delete = async (req: Request, res: Response) => {
     const dto = DeleteProjectDtoSchema.parse(req.params);
     await this._deleteProjectUseCase.execute(req.user!.sub, dto);
-    res.status(204).send();
+    res.status(HttpStatusCode.NO_CONTENT).send();
   };
 }
