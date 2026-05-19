@@ -1,5 +1,6 @@
 import type { LoginDto } from "@application/dtos/auth/login.dto";
 import { InvalidCredentialsException } from "@application/errors/auth/invalid-credentials.exception";
+import type { Logger } from "@application/ports/logger.port";
 import type { PasswordHasher } from "@application/ports/password-hasher.port";
 import type { TokenService } from "@application/ports/token.port";
 import type { User } from "@domain/entities/user.entity";
@@ -10,6 +11,7 @@ export class LoginUseCase {
         private readonly userRepository: UserRepository,
         private readonly passwordHasher: PasswordHasher,
         private readonly tokenService: TokenService,
+        private readonly logger: Logger,
     ) {}
 
     private async getUserOrFail(email: string): Promise<User> {
@@ -41,11 +43,20 @@ export class LoginUseCase {
     }
 
     async execute(input: LoginDto): Promise<{ accessToken: string }> {
+        this.logger.info("Login attempt", {
+            email: input.email,
+        });
+
         const user = await this.getUserOrFail(input.email);
 
         await this.validatePassword(input.password, user);
 
         const accessToken = this.generateToken(user);
+
+        this.logger.info("Login successful", {
+            userId: user.id,
+            email: user.email,
+        });
 
         return { accessToken };
     }

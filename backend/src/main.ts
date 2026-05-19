@@ -1,4 +1,5 @@
 import express from "express";
+import { pinoHttp } from "pino-http";
 import { env } from "@config/env.config";
 
 import { LoginUseCase } from "@application/use-cases/auth/login.usecase";
@@ -28,9 +29,16 @@ import { AuthController } from "@presentation/http/controller/auth.controller";
 import { ProjectController } from "@presentation/http/controller/project.controller";
 import { TaskController } from "@presentation/http/controller/task.controller";
 
+import { pinoLogger } from "@infrastructure/logger/pino.logger";
+
 const app = express();
 
+const httpLogger = pinoHttp({
+  logger: pinoLogger
+})
+
 app.use(express.json());
+app.use(httpLogger);
 
 /**
  * Infrastructure
@@ -45,24 +53,25 @@ const taskRepository = new PrismaTaskRepository();
 /**
  * Use cases
  */
-const registerUseCase = new RegisterUseCase(userRepository, passwordHasher);
+const registerUseCase = new RegisterUseCase(userRepository, passwordHasher, pinoLogger);
 const loginUseCase = new LoginUseCase(
   userRepository,
   passwordHasher,
-  tokenService
+  tokenService,
+  pinoLogger
 );
 
-const createProjectUseCase = new CreateProjectUseCase(projectRepository);
-const listProjectsUseCase = new ListProjectsUseCase(projectRepository);
-const updateProjectUseCase = new UpdateProjectUseCase(projectRepository);
-const getProjectUseCase = new GetProjectUseCase(projectRepository);
-const deleteProjectUseCase = new DeleteProjectUseCase(projectRepository);
+const createProjectUseCase = new CreateProjectUseCase(projectRepository, pinoLogger);
+const listProjectsUseCase = new ListProjectsUseCase(projectRepository, pinoLogger);
+const updateProjectUseCase = new UpdateProjectUseCase(projectRepository, pinoLogger);
+const getProjectUseCase = new GetProjectUseCase(projectRepository, pinoLogger);
+const deleteProjectUseCase = new DeleteProjectUseCase(projectRepository, pinoLogger);
 
-const listTasksUseCase = new ListTasksUseCase(taskRepository);
-const createTaskUseCase = new CreateTaskUseCase(taskRepository);
-const updateTaskUseCase = new UpdateTaskUseCase(taskRepository);
-const deleteTaskUseCase = new DeleteTaskUseCase(taskRepository);
-const getTaskUseCase = new GetTaskUseCase(taskRepository);
+const listTasksUseCase = new ListTasksUseCase(taskRepository, pinoLogger);
+const createTaskUseCase = new CreateTaskUseCase(taskRepository, pinoLogger);
+const updateTaskUseCase = new UpdateTaskUseCase(taskRepository, pinoLogger);
+const deleteTaskUseCase = new DeleteTaskUseCase(taskRepository, pinoLogger);
+const getTaskUseCase = new GetTaskUseCase(taskRepository, pinoLogger);
 
 /**
  * Controller
