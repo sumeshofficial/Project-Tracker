@@ -9,6 +9,8 @@ import { GetProjectDtoSchema } from "@application/dtos/project/get-project.dto";
 import { UpdateProjectDtoSchema } from "@application/dtos/project/update-project.dto";
 import { DeleteProjectDtoSchema } from "@application/dtos/project/delete-project.dto";
 import { HttpStatusCode } from "@shared/constants/http-status";
+import { ResponseHelper } from "../helper/response.helper";
+import { PROJECT_CONSTANTS } from "@presentation/constants/auth/project.constants";
 
 export class ProjectController {
   constructor(
@@ -25,18 +27,33 @@ export class ProjectController {
       dto,
       req.user!.sub
     );
-    res.status(HttpStatusCode.CREATED).json({ success: true, data: project });
+    ResponseHelper.success(
+      res,
+      project,
+      PROJECT_CONSTANTS.MESSAGES.PROJECT_CREATED_SUCCESSFULLY,
+      PROJECT_CONSTANTS.CODES.OK
+    );
   };
 
   list = async (req: Request, res: Response) => {
     const projects = await this._listProjectsUseCase.execute(req.user!.sub);
-    res.status(HttpStatusCode.OK).json({ success: true, data: projects });
+    ResponseHelper.success(
+      res,
+      projects,
+      PROJECT_CONSTANTS.MESSAGES.PROJECTS_FETCHED_SUCCESSFULLY,
+      PROJECT_CONSTANTS.CODES.OK
+    );
   };
 
   get = async (req: Request, res: Response) => {
     const dto = GetProjectDtoSchema.parse(req.params);
     const project = await this._getProjectUseCase.execute(req.user!.sub, dto);
-    res.status(HttpStatusCode.OK).json({ success: true, data: project });
+    ResponseHelper.success(
+      res,
+      project,
+      PROJECT_CONSTANTS.MESSAGES.PROJECT_FETCHED_SUCCESSFULLY,
+      PROJECT_CONSTANTS.CODES.OK
+    );
   };
 
   update = async (req: Request, res: Response) => {
@@ -47,12 +64,17 @@ export class ProjectController {
       params.id,
       dto
     );
-    res.status(HttpStatusCode.OK).json({ success: true, data: project });
+    ResponseHelper.success(
+      res,
+      project,
+      PROJECT_CONSTANTS.MESSAGES.PROJECT_UPDATED_SUCCESSFULLY,
+      PROJECT_CONSTANTS.CODES.OK
+    );
   };
 
   delete = async (req: Request, res: Response) => {
     const dto = DeleteProjectDtoSchema.parse(req.params);
     await this._deleteProjectUseCase.execute(req.user!.sub, dto);
-    res.status(HttpStatusCode.NO_CONTENT).send();
+    res.status(PROJECT_CONSTANTS.CODES.NO_CONTENT).send();
   };
 }
