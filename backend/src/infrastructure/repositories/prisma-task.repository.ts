@@ -3,15 +3,14 @@ import type { TaskRepository } from "@domain/repositories/task.repository";
 import { prismaClient } from "@infrastructure/database/prisma/prisma.client";
 import { TaskMapper } from "@infrastructure/mappers/task.mapper";
 
-
 export class PrismaTaskRepository implements TaskRepository {
-  async save(task: Task): Promise<void> {
+  async save(entity: Task): Promise<void> {
     await prismaClient.task.upsert({
-      where: { id: task.id },
-      update: TaskMapper.toPersistence(task),
+      where: { id: entity.id },
+      update: TaskMapper.toPersistence(entity),
       create: {
-        ...TaskMapper.toPersistence(task),
-        createdAt: task.createdAt,
+        ...TaskMapper.toPersistence(entity),
+        createdAt: entity.createdAt,
       },
     });
   }

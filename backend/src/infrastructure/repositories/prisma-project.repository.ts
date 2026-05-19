@@ -4,13 +4,13 @@ import { prismaClient } from "@infrastructure/database/prisma/prisma.client";
 import { ProjectMapper } from "@infrastructure/mappers/project.mapper";
 
 export class PrismaProjectRepository implements ProjectRepository {
-  async save(project: Project): Promise<void> {
+  async save(entity: Project): Promise<void> {
     await prismaClient.project.upsert({
-      where: { id: project.id },
-      update: ProjectMapper.toPersistence(project),
+      where: { id: entity.id },
+      update: ProjectMapper.toPersistence(entity),
       create: {
-        ...ProjectMapper.toPersistence(project),
-        createdAt: project.createdAt,
+        ...ProjectMapper.toPersistence(entity),
+        createdAt: entity.createdAt,
       },
     });
   }
